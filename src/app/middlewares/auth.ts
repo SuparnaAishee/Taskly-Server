@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { Secret } from 'jsonwebtoken';
 
-import { jwtHelpers } from '../Helpers/jwtHelpers';
 import ApiError from '../errors/ApiError';
 import config from '../config';
+import { jwtHelpers } from '../Helpers/jwtHelpers';
 
 const auth = (...roles: string[]) => {
   return async (
@@ -22,7 +22,7 @@ const auth = (...roles: string[]) => {
 
       const verifiedUser = jwtHelpers.verifyToken(
         token,
-        config.jwt.jwt_secret as Secret,
+        config.jwt.jwt_access_secret as Secret,
       );
 
       req.user = verifiedUser;
